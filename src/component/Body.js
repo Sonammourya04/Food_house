@@ -1,10 +1,16 @@
 import reslist from "../utils/constants.js";
 import RestaurantCard from "./RestaurantCard";
 import {useState , useEffect}  from "react";
+import Shimmer from "./Shimmer.js";
 
 const Body=()=>{
-        const [ ListOfRestaurant ,setListOfRestaurant]= useState(reslist);
+    //Local state variable- super powerful variable
+        const [ ListOfRestaurant ,setListOfRestaurant]= useState([]);
+        const [searchText,setSearchText]=useState("");
+        const[filterRestaurant, setfilterRestaurant]=useState([])
 
+// whenever state variable update , react trigger a reconsillation cycle(re-renders the component)
+        console.log("Body rendered")
         useEffect(()=>{
             fetchData();
 
@@ -16,18 +22,47 @@ const Body=()=>{
                 const json= await  data.json();
                 console.log(json);
                 setListOfRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+                setfilterRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 
-        };
+        }; 
             
-                   
-    return(
+       //ternary operator           
+    return ListOfRestaurant.length==0 ? (
+         <Shimmer/> 
+        ):(
         <div className="body">
             <div className="filter">
+                <div className="Search">
+                    <input 
+                    type="text" 
+                    className="search-box" 
+                    value={searchText}
+                    onChange={(e)=>{
+                        setSearchText(e.target.value);
+                    }}
+                    />
+                    <button 
+                    onClick={()=>{
+                        //filter the restraunt card and update the ui
+                        //searchText
+                        console.log(searchText);
+                        const filterRestaurant=ListOfRestaurant.filter(
+                            (res)=>res.info?.name?.toLowerCase().includes(searchText.toLowerCase()) 
+                        );
+                        setfilterRestaurant(filterRestaurant);
+                    }}
+                    >
+                    Search
+                    </button>
+                    
+                </div>
                 <button className="filter-btn"
                 onClick={
                     ()=>{
-                       
-                    const Filteredlist =ListOfRestaurant.filter((x)=>{ return x.info.avgRating > 4.5})
+                    const Filteredlist =ListOfRestaurant.filter(
+                        (x)=>{ return x.info.avgRating > 4.5
+
+                        })
                      setListOfRestaurant(Filteredlist);
                     }}
                  > 
@@ -36,7 +71,7 @@ const Body=()=>{
             </div>
                 <div className=" res-container">
                   {/* mapping of relist */}
-                  { ListOfRestaurant.map((restaurant) =>
+                  { filterRestaurant.map((restaurant) =>
                    (<RestaurantCard key={restaurant.info.id} resData={restaurant}/>))
                      
                   }
