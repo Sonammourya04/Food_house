@@ -48,3 +48,8 @@ export const Component; import {Component} from "path";
 
 useState() - Superpowerful State Variables in react
 useEffect()
+
+
+# 2 types  Routing in web app
+-Client side Routing
+-Server side routing
