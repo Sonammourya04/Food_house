@@ -18,17 +18,15 @@ const RestaurantMenu = ()=>{
             console.log(json);
             setresInfo(json.data)
     };
+     const[name, id , cuisines, costForTwo,city]=resInfo?.cards[2]?.card?.card?.info;
+   
     return (resInfo=== null)?
        ( <shimmer/>):
     (
         <div className="menu">
-             <h1>{resInfo?.cards[2]?.card?.card?.info?.name}</h1>
-             <h2>Menu</h2>
-             <ul>
-                <li>Biryani</li>
-                <li></li>
-                <li></li>
-             </ul>
+             <h1>{name}</h1>
+             <h2>{id}</h2>
+             <h2>{city}</h2>
         </div>
        
     );
