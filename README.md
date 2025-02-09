@@ -1,5 +1,5 @@
 #parcel
-<!-- Dev Build
+ Dev Build
 Local Server
 HMR = Hot Module Replacement
 File Watching Algorithm - written in C++
@@ -15,7 +15,7 @@ Diagnostic
 Error Handling
 HTTPs
 Tree Shaking - remove unused code
-Different dev and prod bundles -->
+Different dev and prod bundles 
 
  # foodHouse
 
@@ -53,5 +53,5 @@ Different dev and prod bundles -->
 
 
 # 2 types  Routing in web app
--Client side Routing
+-Client side Routing(we have used)
 -Server side routing

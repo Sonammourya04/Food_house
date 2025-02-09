@@ -1,5 +1,5 @@
 import {useState,useEffect} from "react";
-
+import Shimmer from "./Shimmer";
 const RestaurantMenu = ()=>{
 
  const [resInfo,setresInfo]=useState(null);
@@ -18,15 +18,17 @@ const RestaurantMenu = ()=>{
             console.log(json);
             setresInfo(json.data)
     };
-     const[name, id , cuisines, costForTwo,city]=resInfo?.cards[2]?.card?.card?.info;
-   
-    return (resInfo=== null)?
-       ( <shimmer/>):
-    (
+    if(resInfo=== null){ 
+        return<Shimmer/>;
+    }
+    const {name,cuisines,costForTwoMessage}=resInfo?.cards[2]?.card?.card?.info;
+    
+    return(
         <div className="menu">
              <h1>{name}</h1>
-             <h2>{id}</h2>
-             <h2>{city}</h2>
+             <h1>{cuisines.join(",")}</h1>
+             <h1>{costForTwoMessage}</h1>
+            
         </div>
        
     );
