@@ -2,6 +2,8 @@ import reslist from "../utils/constants.js";
 import RestaurantCard from "./RestaurantCard";
 import {useState , useEffect}  from "react";
 import Shimmer from "./Shimmer.js";
+import { Link } from "react-router-dom";
+
 
 const Body=()=>{
     //Local state variable- super powerful variable
@@ -27,7 +29,7 @@ const Body=()=>{
         }; 
             
        //ternary operator           
-    return ListOfRestaurant.length==0 ? (
+    return ListOfRestaurant.length===0 ? (
          <Shimmer/> 
         ):(
         <div className="body">
@@ -71,12 +73,16 @@ const Body=()=>{
             </div>
                 <div className=" res-container">
                   {/* mapping of relist */}
-                  { filterRestaurant.map((restaurant) =>
-                   (<RestaurantCard key={restaurant.info.id} resData={restaurant}/>))
-                     
+                  { filterRestaurant.map((restaurant) => (
+                 <Link 
+                 key={restaurant.info.id}
+                 to={"/restaurants/"+restaurant.info.id}
+                 >
+                 <RestaurantCard key={restaurant.info.id} resData={restaurant}/>
+                 </Link> 
+                 ))
+                    
                   }
-
-               
 
             </div>
         </div>

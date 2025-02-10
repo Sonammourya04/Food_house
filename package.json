@@ -10,6 +10,7 @@
   "author": "Sonam Mourya",
   "license": "ISC",
   "devDependencies": {
+    "constants-browserify": "^1.0.0",
     "parcel": "^2.13.3",
     "process": "^0.11.10"
   },
