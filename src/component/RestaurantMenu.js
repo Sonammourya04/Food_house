@@ -27,13 +27,14 @@ const RestaurantMenu = ()=>{
             console.log(json);
             setresInfo(json.data)
     };
-    if(resInfo=== null){ 
-        return<Shimmer/>;
+    if(resInfo== null){ 
+        return <Shimmer/>;
     }
+    console.log(resInfo);
     const {name,cuisines,costForTwoMessage}=resInfo?.cards[2]?.card?.card?.info;
 
     const itemsCards =
-  resInfo?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards[5]?.card?.card?.itemCards;
+  resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[5]?.card?.card?.categories;
 console.log(itemsCards);
 
     
@@ -47,7 +48,7 @@ console.log(itemsCards);
              <p>Menu</p>
              <ul>
                 <li >
-                {itemsCards.map((items)=><li>{items.card.info.name} -          Rs{ items.card.info.price/100}</li>)}
+                {itemsCards.map((items)=><li>{items.card.info.name} -  Rs{ items.card.info.price/100}</li>)}
                 </li>
              </ul>
         </div>

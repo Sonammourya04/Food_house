@@ -19,7 +19,7 @@ const Body=()=>{
         },[]);
         const fetchData = async() => {
             const data = await fetch(
-                "https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=28.545246&lng=77.2941132&carousel=true&third_party_vendor=1" 
+                "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.545246&lng=77.2941132&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
                 );
                 const json= await  data.json();
                 console.log(json);
@@ -61,10 +61,7 @@ const Body=()=>{
                 <button className="filter-btn"
                 onClick={
                     ()=>{
-                    const Filteredlist =ListOfRestaurant.filter(
-                        (x)=>{ return x.info.avgRating > 4.5
-
-                        })
+                    const Filteredlist =ListOfRestaurant.filter( (x)=> x.info.avgRatingString > "4");
                      setListOfRestaurant(Filteredlist);
                     }}
                  > 
@@ -74,12 +71,9 @@ const Body=()=>{
                 <div className=" res-container">
                   {/* mapping of relist */}
                   { filterRestaurant.map((restaurant) => (
-                 <Link 
-                 key={restaurant.info.id}
-                 to={"/restaurants/"+restaurant.info.id}
-                 >
+                
                  <RestaurantCard key={restaurant.info.id} resData={restaurant}/>
-                 </Link> 
+                
                  ))
                     
                   }
