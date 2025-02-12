@@ -1,8 +1,9 @@
+import User from "./User";
 const About =()=>{
   return  (
 <div>
     <h1>
-        hello its me sonam
+       <User/>
     </h1>
 </div>
     )
